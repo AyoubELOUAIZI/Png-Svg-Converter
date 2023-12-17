@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import "./navbar.css";
 import Image from 'next/image'
+import Link from "next/link";
 
 
 const Navbar = () => {
@@ -31,21 +32,21 @@ const Navbar = () => {
         </div>
         <ul className="nav-links">
           <li>
-            <a href="#">Home</a>
+            <Link href="#">Home</Link>
           </li>
           <li>
-            <a href="#">Solutions</a>
+            <Link href="#">Solutions</Link>
           </li>
           <li>
-            <a href="#">Products</a>
+            <Link href="#">Products</Link>
           </li>
           <li>
-            <a href="#">Services</a>
+            <Link href="#">Services</Link>
           </li>
           <li>
-            <a href="#">Contact Us</a>
+            <Link href="#">Contact Us</Link>
           </li>
-          <li>
+          {/* <li>
             <button className="login-button" href="#">
               Login
             </button>
@@ -54,7 +55,7 @@ const Navbar = () => {
             <button className="join-button" href="#">
               Join
             </button>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </div>
