@@ -22,9 +22,10 @@ const Navbar = () => {
   return (
     <div>
       <nav>
-        <div className="logo">
-          <Image src="/svgpngLogo.png" width={50} height={100} alt="Logo Image" />
-        </div>
+        <Link href="/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse logo">
+                <Image src="/svgpngLogo.png" width={40} height={100} alt="Logo Image" />
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">My CONVERTER</span>
+            </Link>
         <div className="hamburger" onClick={()=>handleHumburgerClicked()}>
           <div className="line1"></div>
           <div className="line2"></div>

@@ -21,12 +21,12 @@ nav{
 
 /*Styling logo*/
 .logo{
-    padding:1vh 1vw;
+    padding:0.9vh 1vw;
     text-align: center;
 }
 .logo img {
-    height: 5rem;
-    width: 4rem;
+    height: 4rem;
+    width: 3rem;
 }
 
 /*Styling Links*/
@@ -44,7 +44,7 @@ nav{
     margin: 0 0.7vw;
 }
 .nav-links li a:hover {
-    color: #61DAFB;
+    color: #1b112a;
 }
 .nav-links li {
     position: relative;
@@ -54,7 +54,7 @@ nav{
     display: block;
     height: 3px;
     width: 0%;
-    background-color: #61DAFB;
+    background-color: #1b112a;
     position: absolute;
     transition: all ease-in-out 250ms;
     margin: 0 0 0 10%;
