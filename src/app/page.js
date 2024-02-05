@@ -1,9 +1,9 @@
-import Image from 'next/image'
+import Hero1 from './components/Hero1/Hero1'
 
 export default function Home() {
   return (
-    <main className='bg-slate-500 min-h-screen'> 
-      hellow world
+    <main className='pt-28'> 
+      <Hero1/>
     </main>
   )
 }
