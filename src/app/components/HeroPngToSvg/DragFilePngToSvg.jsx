@@ -1,12 +1,13 @@
 'use client'
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import Image from 'next/image'
+import Potrace from 'potrace';
+import { saveAs } from 'file-saver';
 
 const DragFilePngToSvg = forwardRef((props, ref) => {
     const iconUrl="https://res.cloudinary.com/dm9udoven/image/upload/v1707164619/svgtopng%20Site/image-upload_g8vfcr.svg"
     const [etrState, setEtrState] = useState('');
-    const [fileState, setFileState] = useState(null);
-    const [pngDataUrl, setPngDataUrl] = useState(''); // State to hold the PNG data URL
+    const [svgDataUrl, setSvgDataUrl] = useState(''); // State to hold the PNG data URL
 
     useEffect(() => {
         const dropzone = document.getElementById('dropzone');
@@ -49,71 +50,91 @@ const DragFilePngToSvg = forwardRef((props, ref) => {
     }, []);
 
     useImperativeHandle(ref, () => ({
-        convertSvgToPng,
-        handleDownloadPngImage // Expose the download PNG function
+        convertPngToSvg,
+        handleDownloadSvgImage 
     }));
 
     function displayPreview(file) {
-        if (file && file instanceof Blob) { // Check if file is a Blob (File objects inherit from Blob)
             var reader = new FileReader();
             reader.onload = (e) => {
-                  // Assuming you want to show the convert button only for SVG files
-                  if (file.type === 'image/svg+xml') {
+                if (file.type === 'image/png' || file.type === 'image/jpeg') {
                     props.setShowConvert(true);
-                }else{
-                    alert("Please provide a SVG image to convert to a PNG image format.\n your image is not SVG 😫.");
+                } else {
+                    alert("Please provide a PNG or JPG image to convert to an SVG image format.\nYour image is not PNG or JPG 😫.");
                     return;
                 }
+                
                 var preview = document.getElementById('preview');
                 preview.src = e.target.result;
-                setEtrState(e.target.result);
-                setFileState(file);
-              
+                setEtrState(e.target.result);              
             };
             reader.readAsDataURL(file);
-        } else {
-            console.error('The provided file is not valid:', file);
-        }
     }
     
-    function convertSvgToPng() {
-            convertSvgToPngImage(etrState, (pngDataUrl) => {
-                setPngDataUrl(pngDataUrl); // Store the PNG data URL after conversion
+    function convertPngToSvg() {
+        convertPngToSvgImage(etrState, (svgDataUrl) => {
+                setSvgDataUrl(svgDataUrl); // Store the SVG data URL after conversion
             });
     }
 
-    function handleDownloadPngImage() {
-        if (pngDataUrl) { // Ensure there's a PNG data URL to download
-            createDownloadLink(pngDataUrl);
-            preview.src = iconUrl;
-        }
+    function handleDownloadSvgImage() {
+    if (svgDataUrl) { 
+        createDownloadLink(svgDataUrl);
+    } else {
+        alert("SVG data is not available for download.");
     }
+}
 
-    function convertSvgToPngImage(svgDataUrl, callback) {
-        let img = new window.Image();
-        img.onload = () => {
-            let canvas = document.createElement('canvas');
-            canvas.width = img.width;
-            canvas.height = img.height;
-
-            let ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0);
-
-            canvas.toBlob((blob) => {
-                let url = URL.createObjectURL(blob);
-                callback(url); // Pass the PNG data URL to the callback
-            }, 'image/png');
-        };
-        img.src = svgDataUrl;
-    }
 
     function createDownloadLink(pngDataUrl) {
         let downloadLink = document.createElement('a');
         downloadLink.href = pngDataUrl;
-        downloadLink.download = 'converted-image.png';
+        downloadLink.download = 'converted-image.svg';
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
+    }
+
+    function convertPngToSvgImage(pngDataUrl, callback) {
+        console.log('convertPng to SVG image url is stared...')
+        // Potrace settings can be adjusted as needed
+        const potraceSettings = {
+            turnPolicy: Potrace.TURNPOLICY_MAJORITY,
+            turdSize: 2,
+            alphaMax: 1,
+            optCurve: true,
+            optTolerance: 0.2,
+            threshold: Potrace.THRESHOLD_AUTO, // Can adjust or use Potrace.THRESHOLD_AUTO for automatic
+            blackOnWhite: true, // Depending on your image, you might want to invert this
+        };
+    
+        // Create a Potrace instance with your settings
+        const potrace = new Potrace(potraceSettings);
+    
+        // Load the image from the data URL
+        potrace.loadUrl(pngDataUrl, function(err) {
+            if (err) {
+                console.error('Potrace loadUrl error:', err);
+                return;
+            }
+    
+            // Once the image is loaded, process it to SVG
+            potrace.process(function(err) {
+                if (err) {
+                    console.error('Potrace process error:', err);
+                    return;
+                }
+    
+                // Get the SVG as a string
+                const svg = potrace.getSVG();
+                console.log('SVG:', svg);
+    
+                // Here, you can use the callback to pass the SVG data URL or directly set state
+                // For example, converting SVG string to Data URL:
+                const svgDataUrl = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+                callback(svgDataUrl);
+            });
+        });
     }
 
     return (
