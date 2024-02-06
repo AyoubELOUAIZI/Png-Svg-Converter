@@ -36,7 +36,7 @@ const Navbar = () => {
             <Link href="/svgtopng">SVG TO PNG</Link>
           </li>
           <li>
-            <Link href="#">Solutions</Link>
+            <Link href="/pngtosvg">PNG TO SVG</Link>
           </li>
           <li>
             <Link href="#">Products</Link>

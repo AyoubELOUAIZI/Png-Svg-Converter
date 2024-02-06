@@ -1,6 +1,7 @@
 import React from 'react'
+import Image from 'next/image'
 
-const Hero3 = () => {
+const Hero3 = ({imgUrl}) => {
   return (
     <div class=" ">
     <div class="container mx-auto py-8 px-4 md:px-0 md:flex md:justify-center md:items-center">
@@ -13,7 +14,7 @@ const Hero3 = () => {
       </button>
         </div>
         <div class="md:w-1/2  mt-8 md:mt-0">
-            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f" alt="Responsive Design" class="w-full h-full object-cover"/>
+            <Image src={imgUrl} alt="Responsive Design" width={400} height={1000} class="w-full h-full object-cover"/>
         </div>
     </div>
 </div>
