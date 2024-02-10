@@ -7,7 +7,7 @@ const imgUrl2="https://res.cloudinary.com/dm9udoven/image/upload/v1707226167/svg
 const page = () => {
     return (
         <div>
-        <div className='flex justify-center items-center'>
+        <div className='xs:pt-10  lg:pt-0 flex justify-center items-center'>
             <HeroPngToSvg/>
         </div>
             <Hero3 imgUrl={imgUrl1}/>

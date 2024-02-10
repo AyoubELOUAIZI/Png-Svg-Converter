@@ -1,5 +1,4 @@
 "use client";
-import React, { useEffect } from "react";
 import "./navbar.css";
 import Image from 'next/image'
 import Link from "next/link";
@@ -39,14 +38,14 @@ const Navbar = () => {
             <Link href="/pngtosvg">PNG TO SVG</Link>
           </li>
           <li>
-            <Link href="#">Products</Link>
+            <Link href="/privacy-policy">PRIVACY POLICY</Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="#">Services</Link>
           </li>
           <li>
             <Link href="#">Contact Us</Link>
-          </li>
+          </li> */}
           {/* <li>
             <button className="login-button" href="#">
               Login
