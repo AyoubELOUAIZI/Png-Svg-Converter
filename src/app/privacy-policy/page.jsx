@@ -1,5 +1,11 @@
 import React from "react";
 
+export const metadata = {
+  title: 'Privacy Policy - MyConverter',
+  description: 'Learn about how we handle your privacy at MyConverter. Our Privacy Policy outlines our commitment to protecting your personal information and how we collect, use, and safeguard data on our platform. At MyConverter, we prioritize transparency and security, ensuring that your privacy is respected and your data is handled with care. Explore our Privacy Policy to understand how we strive to maintain your trust and confidence while using our services.',
+};
+
+
 export default function PrivacyPolicy() {
   return (
     <div className="container mx-auto p-4 pt-28 bg-white rounded-lg shadow-lg">

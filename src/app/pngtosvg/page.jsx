@@ -10,6 +10,13 @@ const title2="Exceptional Quality, Every Time";
 const desc2="Experience unparalleled quality with MyCONVERTER's PNG to SVG conversion. Our platform utilizes advanced vectorization techniques to produce SVG images that retain the finest details and clarity of your PNG artwork. Whether you're converting logos, illustrations, or photographs, MyCONVERTER guarantees superior quality results that exceed expectations.";
 const title3="Streamlined Workflow";
 const desc3="Say goodbye to complex conversion processes. MyCONVERTER streamlines the PNG to SVG conversion, providing you with a straightforward solution that saves time and effort. With our efficient workflow, you can quickly convert PNG files to SVG images without compromising on quality, empowering you to unleash the full potential of your designs.";
+
+export const metadata = {
+    title: 'Convert PNG to SVG',
+    description: "Convert your raster graphics in portable network graphics (PNG) format to scalable vector graphics (SVG) effortlessly. MyConverter offers a straightforward solution for transforming PNG images into high-quality SVG files, preserving details and clarity while ensuring scalability. Whether you're a designer, developer, or enthusiast, MyConverter simplifies the PNG to SVG conversion process, empowering you to create vector graphics with ease.",
+  };
+  
+
 const page = () => {
     return (
         <div>
